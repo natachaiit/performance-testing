@@ -15,6 +15,12 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   nestjs-api:
     build:
@@ -30,6 +36,12 @@ services:
       DB_PORT: 5432
     depends_on:
       - postgres
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   postgres:
     image: postgres:14
