@@ -111,5 +111,5 @@ func main() {
     r.PUT("/items/:id", updateItem)
     r.DELETE("/items/:id", deleteItem)
 
-    r.Run(":8080")
+    r.Run(":3100")
 }

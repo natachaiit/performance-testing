@@ -11,8 +11,8 @@ services:
       DB_PASSWORD: password
       DB_NAME: itemsdb
       DB_PORT: 5432
-    ports:
-      - "8080:8080"
+    expose:
+      - "3100"
     depends_on:
       - postgres
     deploy:
@@ -26,8 +26,8 @@ services:
     build:
       context: ./loadtest-nest-api
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       DB_HOST: postgres
       DB_USER: user
@@ -49,5 +49,5 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: itemsdb
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
