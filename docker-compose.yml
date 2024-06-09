@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  golang-api:
+    build:
+      context: ./loadtest-go-api
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: postgres
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: itemsdb
+      DB_PORT: 5432
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  nestjs-api:
+    build:
+      context: ./loadtest-nest-api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: postgres
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: itemsdb
+      DB_PORT: 5432
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: itemsdb
+    ports:
+      - "5432:5432"
